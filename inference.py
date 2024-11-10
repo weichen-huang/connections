@@ -1,7 +1,7 @@
 from solvers.ckmeans import ck_get_clusters
 from utils import create_subsets
 from tqdm import tqdm
-from models.gpt2 import score
+from models.qwen import score
 
 
 words = input("Enter comma separated words:").split(",")

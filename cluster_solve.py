@@ -4,7 +4,7 @@ from solvers.ckmeans import ck_get_clusters
 from solvers.ilp import get_clusters_ilp
 from utils import create_subsets
 from tqdm import tqdm
-from models.gpt2 import score
+from models.qwen import score
 
 data = load_connections()
 

@@ -11,7 +11,7 @@ if torch.mps.is_available():
 elif torch.cuda.is_available():
     device = torch.device("cuda")
 
-model = HookedTransformer.from_pretrained("gpt2-small", device=device)
+model = HookedTransformer.from_pretrained("Qwen/Qwen2-0.5B", device=device)
 
 def score(arr, connector="and", permute=True):
 
