@@ -4,28 +4,22 @@ from tqdm import tqdm
 from models.gpt2 import score
 
 
-words = input().split()
-pairs = create_subsets(words, n=2)
-scores = [[pair, score(pair, connector="and")] for pair in tqdm(pairs)]
+words = input("Enter comma separated words:").split(",")
+slow = False
+found = []
 
-adj = [[0.0 for i in range(16)] for i in range(16)]
+while len(found) != 4:
+    pairs = create_subsets(words, n=4)
+    quad = sorted([[score(pair, connector="and", permute=slow), pair] for pair in tqdm(pairs)])[0][1]
+    tmp = []
+    for word in words:
+        if word not in quad:
+            tmp.append(word)
 
-for pair, result in scores:
-    i = words.index(pair[0])
-    j = words.index(pair[1])
+    words = tmp
+    found.append(set(quad))
 
-    adj[i][j] = result
-    adj[j][i] = result
-
-labels = ck_get_clusters(adj)
-clusters = [[] for i in range(4)]
-
-for i, l in enumerate(labels):
-    clusters[l].append(words[i])
-
-clusters = sorted(clusters)
-
-print(clusters)
+print(found)
 
 if __name__ == '__main__':
     pass
